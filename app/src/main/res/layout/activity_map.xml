@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/basecolor"
+    android:orientation="vertical">
+
+    <RelativeLayout style="@style/titleStyle">
+
+        <TextView
+            android:id="@+id/toolbar"
+            style="@style/titleTxt"
+            android:text="地址选择" />
+
+        <TextView
+            android:id="@+id/am_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确定"
+            android:textColor="@color/app_txt_black" />
+
+    </RelativeLayout>
+
+    <View style="@style/Line_H_Drak" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <com.baidu.mapapi.map.MapView
+            android:id="@+id/am_map"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@color/transparent"
+            android:paddingBottom="25dp"
+            android:src="@drawable/icon_mark" />
+
+        <ImageView
+            android:id="@+id/am_location"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/app_white_color"
+            android:padding="5dp"
+            android:src="@drawable/ico_location"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/am_search"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_above="@id/am_location"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/app_white_color"
+            android:padding="7dp"
+            android:src="@drawable/ico_search"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <View style="@style/Line_H_Drak" />
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/am_srl"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:srlEnableOverScrollBounce="true"
+        app:srlEnablePureScrollMode="true">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/am_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+</LinearLayout>

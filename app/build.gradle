@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        applicationId "com.xz.map"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    signingConfigs {
+
+
+        release {
+            storeFile file("..\\BaiduMap.jks")
+            storePassword "123456"
+            keyAlias "demo"
+            keyPassword "123456"
+        }
+    }
+
+    buildTypes {
+
+        debug {
+            signingConfig signingConfigs.release
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            signingConfig signingConfigs.release
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+
+    //
+    compile "com.android.support:support-v4:${supportVersion}"
+    compile "com.android.support:appcompat-v7:${supportVersion}"
+    compile "com.android.support:design:${supportVersion}"
+    compile "com.android.support:recyclerview-v7:${supportVersion}"
+//
+
+    //刷新加载(https://github.com/scwang90/SmartRefreshLayout)
+    compile('com.scwang.smartrefresh:SmartRefreshLayout:1.0.3-alpha-5') {
+        exclude group: 'com.android.support'
+    }
+
+    //基础库
+    compile(name: 'XCoderAppLib', ext: 'aar')
+
+    compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/IndoorscapeAlbumPlugin.jar')
+}

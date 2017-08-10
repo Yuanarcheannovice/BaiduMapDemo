@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ee6432</color>
+    <color name="colorPrimaryDark">#ee6432</color>
+    <color name="colorAccent">#05cdc8</color>
+
+    <!-- 背景色-->
+    <color name="basecolor">#f5f5f5</color>
+
+    <!--文字标准灰色-->
+    <color name="app_txt_gray">#666666</color>
+
+    <!--app副色-->
+    <color name="app_sub_color">#ee6432</color>
+
+    <!--文字标准浅灰色-->
+    <color name="app_txt_gray_light">#999999</color>
+
+    <!--文字标准黑色-->
+    <color name="app_txt_black">#333333</color>
+
+    <!--app主白色-->
+    <color name="app_white_color">#ffffff</color>
+
+    <!-- 透明-->
+    <color name="transparent">#00000000</color>
+</resources>
