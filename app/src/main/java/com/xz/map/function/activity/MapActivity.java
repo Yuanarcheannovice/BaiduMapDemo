@@ -44,7 +44,7 @@ public class MapActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.am_submit:
                 //提交位置
-
+                mSer.doSubmit();
                 break;
             case R.id.am_location:
                 //重新定位用户位置

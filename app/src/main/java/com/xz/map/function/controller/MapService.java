@@ -270,6 +270,7 @@ public class MapService {
                 //获取反向地理编码结果
                 List<PoiInfo> poiList = result.getPoiList();
                 mMapAdapter.setDatas(poiList, true);
+                mCom.mRecyclerView.scrollToPosition(0);
             }
         };
         mGeoCoder.setOnGetGeoCodeResultListener(getGeoListener);
@@ -334,6 +335,13 @@ public class MapService {
                 }
             }
         });
+    }
+
+
+    //提交位置信息
+    public void doSubmit(){
+        PoiInfo item = mMapAdapter.getItem(mMapAdapter.getmIndexTag());
+        ToastUtil.showToast("经度:"+item.location.longitude+"-纬度:"+item.location.latitude+"-地址:"+item.address);
     }
 
 

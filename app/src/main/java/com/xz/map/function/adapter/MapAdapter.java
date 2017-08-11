@@ -22,6 +22,10 @@ public class MapAdapter extends RvPureDataAdapter<PoiInfo> {
     private int mIndexTag=0;
     private PoiInfo mUserPoiInfo;
 
+    public int getmIndexTag() {
+        return mIndexTag;
+    }
+
     public void setmUserPoiInfo(PoiInfo userPoiInfo) {
         this.mUserPoiInfo = userPoiInfo;
     }
