@@ -31,12 +31,9 @@ import com.baidu.mapapi.search.poi.PoiDetailResult;
 import com.baidu.mapapi.search.poi.PoiIndoorResult;
 import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
-import com.baidu.mapapi.search.sug.OnGetSuggestionResultListener;
-import com.baidu.mapapi.search.sug.SuggestionResult;
-import com.baidu.mapapi.search.sug.SuggestionSearch;
 import com.xcoder.lib.annotation.Injection;
-import com.xz.map.MapPositioning;
 import com.xz.map.R;
+import com.xz.map.app.MapPositioning;
 import com.xz.map.function.activity.MapActivity;
 import com.xz.map.function.adapter.MapAdapter;
 import com.xz.map.function.model.MapComponter;
@@ -58,7 +55,6 @@ public class MapService {
     private BaiduMap mBaiduMap;
     private MapAdapter mMapAdapter;
     private PoiSearch mPoiSearch;
-    private SuggestionSearch mSuggestionSearch;
     private MapPositioning mMapPositioning;
     private GeoCoder mGeoCoder;
     private boolean isRvClick = false;//是否是点击列表导致的移动
@@ -181,7 +177,7 @@ public class MapService {
                 userPoi.location = latLng;
 
                 userPoi.address = location.getAddrStr() + location.getLocationDescribe();
-                userPoi.name = "[定位位置]";
+                userPoi.name = "[位置]";
                 mMapAdapter.setmUserPoiInfo(userPoi);
 
                 mGeoCoder.reverseGeoCode(new ReverseGeoCodeOption().location(latLng));
@@ -207,7 +203,7 @@ public class MapService {
             PoiInfo userPoi = new PoiInfo();
             userPoi.location = latLng;
             userPoi.address = address;
-            userPoi.name = "[搜索位置]";
+            userPoi.name = "[位置]";
             mMapAdapter.setmUserPoiInfo(userPoi);
             mGeoCoder.reverseGeoCode(new ReverseGeoCodeOption().location(latLng));
             setNewLatLngZoom(latLng);
@@ -219,7 +215,7 @@ public class MapService {
      * 检索 创建
      */
     private void createSearch() {
-        //兴趣点检索
+        //兴趣点检索   没有用到
         mPoiSearch = PoiSearch.newInstance();
 
         OnGetPoiSearchResultListener poiListener = new OnGetPoiSearchResultListener() {
@@ -249,27 +245,6 @@ public class MapService {
          *
          */
 
-        //在线建议查询
-        mSuggestionSearch = SuggestionSearch.newInstance();
-        OnGetSuggestionResultListener suggestionListener = new OnGetSuggestionResultListener() {
-            public void onGetSuggestionResult(SuggestionResult res) {
-                if (res == null || res.getAllSuggestions() == null) {
-                    return;
-                    //未找到相关结果
-                }
-                //获取在线建议检索结果
-            }
-        };
-        mSuggestionSearch.setOnGetSuggestionResultListener(suggestionListener);
-
-
-        /**
-         * // 使用建议搜索服务获取建议列表，结果在onSuggestionResult()中更新
-         mSuggestionSearch.requestSuggestion((new SuggestionSearchOption())
-         .keyword(“百度”)
-         .city(“北京”));
-         */
-
         //地里编码
         mGeoCoder = GeoCoder.newInstance();
         OnGetGeoCoderResultListener getGeoListener = new OnGetGeoCoderResultListener() {
@@ -285,6 +260,13 @@ public class MapService {
                 if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
                     //没有找到检索结果
                 }
+                //设置搜索地址
+                PoiInfo userPoi = new PoiInfo();
+                userPoi.location = result.getLocation();
+                userPoi.address = result.getSematicDescription();
+                userPoi.name = "[位置]";
+                mMapAdapter.setmUserPoiInfo(userPoi);
+
                 //获取反向地理编码结果
                 List<PoiInfo> poiList = result.getPoiList();
                 mMapAdapter.setDatas(poiList, true);
@@ -334,6 +316,8 @@ public class MapService {
             @Override
             public void onMapStatusChangeFinish(MapStatus mapStatus) {
                 if (!isRvClick) {
+                    mapStatus.toString();
+
                     //得到中心点坐标，开始反地理编码
                     LatLng centerLatLng = mapStatus.target;
                     mGeoCoder.reverseGeoCode(new ReverseGeoCodeOption().location(centerLatLng));
@@ -357,8 +341,7 @@ public class MapService {
         if (mMapPositioning != null)
             mMapPositioning.onExit();
 
-        if (mSuggestionSearch != null)
-            mSuggestionSearch.destroy();
+
 
         if (mPoiSearch != null)
             mPoiSearch.destroy();

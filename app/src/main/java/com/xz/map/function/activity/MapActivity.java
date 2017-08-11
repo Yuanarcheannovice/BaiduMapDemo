@@ -10,7 +10,7 @@ import com.baidu.mapapi.SDKInitializer;
 import com.xcoder.lib.annotation.ContentView;
 import com.xcoder.lib.annotation.Injection;
 import com.xcoder.lib.annotation.event.OnClick;
-import com.xz.map.BaseActivity;
+import com.xz.map.app.BaseActivity;
 import com.xz.map.R;
 import com.xz.map.function.controller.MapService;
 import com.xz.map.util.AppStaticVariable;
@@ -42,8 +42,8 @@ public class MapActivity extends BaseActivity {
     @OnClick({R.id.am_submit, R.id.am_location, R.id.am_search})
     public void onClick(View view) {
         switch (view.getId()) {
-
             case R.id.am_submit:
+                //提交位置
 
                 break;
             case R.id.am_location:
@@ -65,7 +65,7 @@ public class MapActivity extends BaseActivity {
                 String address = data.getStringExtra(AppStaticVariable.MAP_SEARCH_ADDRESS);
                 double lon = data.getDoubleExtra(AppStaticVariable.MAP_SEARCH_LONGITUDE, 0.0);
                 double lat = data.getDoubleExtra(AppStaticVariable.MAP_SEARCH_LATITUDE, 0.0);
-                mSer.searchStr(address,lon, lat);
+                mSer.searchStr(address, lon, lat);
             }
         }
     }
@@ -89,13 +89,6 @@ public class MapActivity extends BaseActivity {
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
         mSer.onExit();
         mSer.mCom.mMapView.onDestroy();
-        //释放POI检索实例；
-//        if (aras.mSuggestionSearch != null) {
-//            aras.mSuggestionSearch.destroy();
-//        }
-//        if (aras.geoCoder != null) {
-//            aras.geoCoder.destroy();
-//        }
         return "MapActivity";
     }
 }

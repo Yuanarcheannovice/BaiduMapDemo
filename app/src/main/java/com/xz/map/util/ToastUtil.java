@@ -3,7 +3,7 @@ package com.xz.map.util;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.xz.map.App;
+import com.xz.map.app.App;
 
 public class ToastUtil {
 

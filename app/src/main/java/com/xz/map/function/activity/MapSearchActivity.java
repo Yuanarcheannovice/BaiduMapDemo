@@ -8,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -21,12 +22,13 @@ import com.xcoder.lib.annotation.ContentView;
 import com.xcoder.lib.annotation.ViewInject;
 import com.xcoder.lib.annotation.event.OnClick;
 import com.xcoder.lib.utils.Utils;
-import com.xz.map.BaseActivity;
 import com.xz.map.R;
+import com.xz.map.app.BaseActivity;
 import com.xz.map.function.adapter.MapSearchAdapter;
 import com.xz.map.util.AppStaticVariable;
 import com.xz.map.util.adapter.RvPureAdapter;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -68,8 +70,16 @@ public class MapSearchActivity extends BaseActivity {
                     return;
                 }
                 List<SuggestionResult.SuggestionInfo> ssList = suggestionResult.getAllSuggestions();
-                mMapSearchAdapter.setDatas(ssList, true);
 
+                //关键搜索时，数据有时候没有经纬度，和地址信息,需要剔除
+                Iterator<SuggestionResult.SuggestionInfo> itParent = ssList.iterator();
+                while (itParent.hasNext()) {
+                    SuggestionResult.SuggestionInfo ss = itParent.next();
+                    if (ss.pt == null || TextUtils.isEmpty(ss.district)) {
+                        itParent.remove();
+                    }
+                }
+                mMapSearchAdapter.setDatas(ssList, true);
             }
         });
     }
@@ -78,8 +88,6 @@ public class MapSearchActivity extends BaseActivity {
      * 对搜索框进行监听
      */
     public void initView() {
-
-
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mMapSearchAdapter = new MapSearchAdapter();
@@ -90,7 +98,7 @@ public class MapSearchActivity extends BaseActivity {
                 Intent intent = new Intent();
                 intent.putExtra(AppStaticVariable.MAP_SEARCH_LONGITUDE, ss.pt.longitude);
                 intent.putExtra(AppStaticVariable.MAP_SEARCH_LATITUDE, ss.pt.latitude);
-                intent.putExtra(AppStaticVariable.MAP_SEARCH_ADDRESS, ss.city+ss.district+ss.key);
+                intent.putExtra(AppStaticVariable.MAP_SEARCH_ADDRESS, ss.city + ss.district + ss.key);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
             }

@@ -1,4 +1,4 @@
-package com.xz.map;
+package com.xz.map.app;
 
 import android.app.ActivityManager;
 import android.content.Context;
