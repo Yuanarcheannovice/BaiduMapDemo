@@ -4,8 +4,8 @@ import android.support.v4.content.ContextCompat;
 import android.widget.TextView;
 
 import com.baidu.mapapi.search.core.PoiInfo;
-import com.xz.map.app.App;
 import com.xz.map.R;
+import com.xz.map.app.App;
 import com.xz.map.util.adapter.RvPureDataAdapter;
 import com.xz.map.util.adapter.util.RvViewHolder;
 
