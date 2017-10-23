@@ -11,6 +11,7 @@ import com.xz.map.R;
 
 /**
  * Created by xz on 2017/8/8 0008.
+ * @author xz
  */
 
 public class MapComponter {
@@ -24,9 +25,15 @@ public class MapComponter {
     @ViewInject(R.id.am_map)
     public MapView mMapView;
 
+    /**
+     * 定位按钮
+     */
     @ViewInject(R.id.am_location)
-    public ImageView mLocationButton;//定位按钮
+    public ImageView mLocationButton;
 
+    /**
+     * 搜索按钮
+     */
     @ViewInject(R.id.am_search)
-    public ImageView mSearchButton;//搜索按钮
+    public ImageView mSearchButton;
 }

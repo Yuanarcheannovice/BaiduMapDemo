@@ -38,12 +38,13 @@ import com.xz.map.function.activity.MapActivity;
 import com.xz.map.function.adapter.MapAdapter;
 import com.xz.map.function.model.MapComponter;
 import com.xz.map.util.ToastUtil;
-import com.xz.map.util.adapter.RvPureAdapter;
+import com.xz.xadapter.XRvPureAdapter;
 
 import java.util.List;
 
 /**
  * Created by xz on 2017/8/8 0008.
+ * @author xz
  */
 
 public class MapService {
@@ -51,13 +52,19 @@ public class MapService {
     public MapComponter mCom;
 
     private MapActivity mActivity;
-    private float mapZoom = 19;//地图放大级别
+    /**
+     * 地图放大级别
+     */
+    private float mapZoom = 19;
     private BaiduMap mBaiduMap;
     private MapAdapter mMapAdapter;
     private PoiSearch mPoiSearch;
     private MapPositioning mMapPositioning;
     private GeoCoder mGeoCoder;
-    private boolean isRvClick = false;//是否是点击列表导致的移动
+    /**
+     * 是否是点击列表导致的移动
+     */
+    private boolean isRvClick = false;
     private ProgressDialog mProgressDialog;
 
     public void init(MapActivity activity) {
@@ -75,7 +82,7 @@ public class MapService {
         mCom.mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mCom.mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, LinearLayoutManager.VERTICAL));
         mMapAdapter = new MapAdapter();
-        mMapAdapter.setOnItemClickListener(new RvPureAdapter.OnItemClickListener() {
+        mMapAdapter.setOnItemClickListener(new XRvPureAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
                 isRvClick = true;
@@ -104,8 +111,6 @@ public class MapService {
         mCom.mMapView.showScaleControl(false);
         // 开启定位图层
         mBaiduMap.setMyLocationEnabled(true);
-        // 当不需要定位图层时关闭定位图层
-        //mBaiduMap.setMyLocationEnabled(false);
         //普通地图
         mBaiduMap.setMapType(BaiduMap.MAP_TYPE_NORMAL);
         //楼快效果
@@ -146,7 +151,7 @@ public class MapService {
         mProgressDialog = ProgressDialog.show(mActivity, null, "正在定位,请稍后");
         //开启定位
         mMapPositioning = MapPositioning.getInstance();
-        mMapPositioning.setmLocation(new MapPositioning.XLocation() {
+        mMapPositioning.setmLocation(new MapPositioning.XbdLocation() {
 
             @Override
             public void locSuccess(BDLocation location) {
@@ -219,11 +224,13 @@ public class MapService {
         mPoiSearch = PoiSearch.newInstance();
 
         OnGetPoiSearchResultListener poiListener = new OnGetPoiSearchResultListener() {
+            @Override
             public void onGetPoiResult(PoiResult result) {
                 //获取POI检索结果
                 mMapAdapter.setDatas(result.getAllPoi(), true);
             }
 
+            @Override
             public void onGetPoiDetailResult(PoiDetailResult result) {
                 //获取Place详情页检索结果
             }
@@ -233,21 +240,12 @@ public class MapService {
                 //poi 室内检索结果回调
             }
         };
+        //mPoiSearch.searchInCity((new PoiCitySearchOption()).city(“北京”).keyword(“美食”).pageNum(10)).pageNum(10));
         mPoiSearch.setOnGetPoiSearchResultListener(poiListener);
-
-        /**
-         *
-         * mPoiSearch.searchInCity((new PoiCitySearchOption())
-         .city(“北京”)
-         .keyword(“美食”)
-         .pageNum(10));
-         .pageNum(10));
-         *
-         */
-
         //地里编码
         mGeoCoder = GeoCoder.newInstance();
         OnGetGeoCoderResultListener getGeoListener = new OnGetGeoCoderResultListener() {
+            @Override
             public void onGetGeoCodeResult(GeoCodeResult result) {
                 if (result == null || result.error != SearchResult.ERRORNO.NO_ERROR) {
                     //没有检索到结果
@@ -338,7 +336,9 @@ public class MapService {
     }
 
 
-    //提交位置信息
+    /**
+     * 提交位置信息
+     */
     public void doSubmit(){
         PoiInfo item = mMapAdapter.getItem(mMapAdapter.getmIndexTag());
         ToastUtil.showToast("经度:"+item.location.longitude+"-纬度:"+item.location.latitude+"-地址:"+item.address);
@@ -346,13 +346,15 @@ public class MapService {
 
 
     public void onExit() {
-        if (mMapPositioning != null)
+        if (mMapPositioning != null) {
             mMapPositioning.onExit();
+        }
 
 
 
-        if (mPoiSearch != null)
+        if (mPoiSearch != null) {
             mPoiSearch.destroy();
+        }
 
         if (mGeoCoder != null) {
             mGeoCoder.destroy();

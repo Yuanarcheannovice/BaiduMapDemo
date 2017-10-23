@@ -5,6 +5,9 @@ import android.widget.Toast;
 
 import com.xz.map.app.App;
 
+/**
+ * @author xz
+ */
 public class ToastUtil {
 
     public static void showToast(String string) {
@@ -38,7 +41,7 @@ public class ToastUtil {
 
     public static void doException(Exception exc) {
         exc.getLocalizedMessage();
-        if (TextUtils.equals(exc.toString(), "java.net.SocketTimeoutException")) {
+        if (TextUtils.equals(exc.toString(), AppStaticVariable.TOAST_ERROR_TIMEOUT)) {
             showToast("服务器连接超时，请稍后再试");
         } else {
             noNet();

@@ -5,15 +5,16 @@ import android.widget.TextView;
 
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.xz.map.R;
-import com.xz.map.util.adapter.RvPureDataAdapter;
-import com.xz.map.util.adapter.util.RvViewHolder;
+import com.xz.xadapter.XRvPureDataAdapter;
+import com.xz.xadapter.xutil.XRvViewHolder;
 
 /**
  * Created by xz on 2017/8/9 0009.
  * 地图 地址列表搜索 适配器
+ * @author xz
  */
 
-public class MapSearchAdapter extends RvPureDataAdapter<SuggestionResult.SuggestionInfo> {
+public class MapSearchAdapter extends XRvPureDataAdapter<SuggestionResult.SuggestionInfo> {
 
     @Override
     public int getItemLayout(int viewType) {
@@ -21,7 +22,7 @@ public class MapSearchAdapter extends RvPureDataAdapter<SuggestionResult.Suggest
     }
 
     @Override
-    public void onBindViewHolder(RvViewHolder holder, int position) {
+    public void onBindViewHolder(XRvViewHolder holder, int position) {
         TextView bigTv=holder.getView(R.id.im_bigtv);
         SuggestionResult.SuggestionInfo ss=mDatas.get(position);
 

@@ -26,7 +26,7 @@ import com.xz.map.R;
 import com.xz.map.app.BaseActivity;
 import com.xz.map.function.adapter.MapSearchAdapter;
 import com.xz.map.util.AppStaticVariable;
-import com.xz.map.util.adapter.RvPureAdapter;
+import com.xz.xadapter.XRvPureAdapter;
 
 import java.util.Iterator;
 import java.util.List;
@@ -34,6 +34,7 @@ import java.util.List;
 /**
  * 聊天地图查询
  * Created by xz on 2016/10/18 0018.
+ * @author xz
  */
 @ContentView(R.layout.activity_map_search)
 public class MapSearchActivity extends BaseActivity {
@@ -61,7 +62,8 @@ public class MapSearchActivity extends BaseActivity {
      * 搜索
      */
     public void initSearch() {
-        mSuggestionSearch = SuggestionSearch.newInstance();//关键词搜索
+        //关键词搜索
+        mSuggestionSearch = SuggestionSearch.newInstance();
         mSuggestionSearch.setOnGetSuggestionResultListener(new OnGetSuggestionResultListener() {
             @Override
             public void onGetSuggestionResult(SuggestionResult suggestionResult) {
@@ -91,7 +93,7 @@ public class MapSearchActivity extends BaseActivity {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         mMapSearchAdapter = new MapSearchAdapter();
-        mMapSearchAdapter.setOnItemClickListener(new RvPureAdapter.OnItemClickListener() {
+        mMapSearchAdapter.setOnItemClickListener(new XRvPureAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {
                 SuggestionResult.SuggestionInfo ss = mMapSearchAdapter.getItem(position);
@@ -120,11 +122,11 @@ public class MapSearchActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 // 表示最终内容
-                String map_Input = mEditText.getText().toString().trim();
-                if (!Utils.isEmpty(map_Input)) {
+                String mapInput = mEditText.getText().toString().trim();
+                if (!Utils.isEmpty(mapInput)) {
                     //搜索关键词
                     mSuggestionSearch.requestSuggestion((new SuggestionSearchOption())
-                            .keyword(map_Input).city("长沙")
+                            .keyword(mapInput).city("长沙")
                     );
                 }
             }
@@ -146,13 +148,14 @@ public class MapSearchActivity extends BaseActivity {
             case R.id.ams_back:
                 finish();
                 break;
+            default:
+                break;
         }
     }
 
 
     @Override
-    public Object closeActivity() {
-        return "MapSearchActivity";
+    public void closeActivity() {
 
     }
 

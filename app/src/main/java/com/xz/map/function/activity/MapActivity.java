@@ -19,6 +19,7 @@ import com.xz.map.util.AppStaticVariable;
 /**
  * Created by xz on 2017/8/8 0008.
  * 关于地图的activity
+ * @author xz
  */
 @ContentView(R.layout.activity_map)
 public class MapActivity extends BaseActivity {
@@ -43,9 +44,6 @@ public class MapActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.am_submit:
-
-
-
                 //提交位置
                 mSer.doSubmit();
                 break;
@@ -56,6 +54,8 @@ public class MapActivity extends BaseActivity {
             case R.id.am_search:
                 //搜索按钮
                 openActivityResult(MapSearchActivity.class, null, AppStaticVariable.MAP_SEARCH_CODE);
+                break;
+            default:
                 break;
         }
     }
@@ -88,10 +88,10 @@ public class MapActivity extends BaseActivity {
     }
 
     @Override
-    public Object closeActivity() {
+    public void closeActivity() {
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
         mSer.onExit();
         mSer.mCom.mMapView.onDestroy();
-        return "MapActivity";
+
     }
 }

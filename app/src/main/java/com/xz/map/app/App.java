@@ -5,6 +5,7 @@ import android.content.Context;
 
 /**
  * Created by xz on 2017/8/10 0010.
+ * @author xz
  */
 
 public class App extends Application{
@@ -13,6 +14,6 @@ public class App extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
-        this.mContext=getApplicationContext();
+        mContext=getApplicationContext();
     }
 }

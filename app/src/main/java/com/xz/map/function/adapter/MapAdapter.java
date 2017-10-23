@@ -6,8 +6,8 @@ import android.widget.TextView;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.xz.map.R;
 import com.xz.map.app.App;
-import com.xz.map.util.adapter.RvPureDataAdapter;
-import com.xz.map.util.adapter.util.RvViewHolder;
+import com.xz.xadapter.XRvPureDataAdapter;
+import com.xz.xadapter.xutil.XRvViewHolder;
 
 import java.util.List;
 
@@ -16,9 +16,10 @@ import java.util.List;
 /**
  * Created by xz on 2017/8/9 0009.
  * 地图 地址列表 适配器
+ * @author xz
  */
 
-public class MapAdapter extends RvPureDataAdapter<PoiInfo> {
+public class MapAdapter extends XRvPureDataAdapter<PoiInfo> {
     private int mIndexTag=0;
     private PoiInfo mUserPoiInfo;
 
@@ -41,7 +42,7 @@ public class MapAdapter extends RvPureDataAdapter<PoiInfo> {
     }
 
     @Override
-    public void onBindViewHolder(RvViewHolder holder, int position) {
+    public void onBindViewHolder(XRvViewHolder holder, int position) {
         TextView bigTv=holder.getView(R.id.im_bigtv);
 
         TextView minTv=holder.getView(R.id.im_migtv);
@@ -68,9 +69,13 @@ public class MapAdapter extends RvPureDataAdapter<PoiInfo> {
      */
     @Override
     public void setDatas(List<PoiInfo> datas, boolean isRefresh) {
-        if(mUserPoiInfo!=null&&datas!=null)
-            datas.add(0,mUserPoiInfo);
+        if(mUserPoiInfo!=null&&datas!=null) {
+            datas.add(0, mUserPoiInfo);
+        }
         super.setDatas(datas, isRefresh);
         mIndexTag=0;
     }
+
+
+
 }

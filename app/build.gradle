@@ -69,6 +69,9 @@ dependencies {
     compile files('libs/BaiduLBS_Android.jar')
     compile files('libs/IndoorscapeAlbumPlugin.jar')
 
+    compile('com.github.Yuanarcheannovice:XBaseAdapter:1.2') {
+        exclude group: 'com.android.support'
+    }
+
     compile 'com.github.Yuanarcheannovice:XCoderAppLib:1.0.1'
-    compile 'com.github.nanchen2251:CompressHelper:1.0.5'
 }
