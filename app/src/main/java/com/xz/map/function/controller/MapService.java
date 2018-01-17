@@ -82,6 +82,7 @@ public class MapService {
         mCom.mRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         mCom.mRecyclerView.addItemDecoration(new DividerItemDecoration(mActivity, LinearLayoutManager.VERTICAL));
         mMapAdapter = new MapAdapter();
+        //条目点击移动界面
         mMapAdapter.setOnItemClickListener(new XRvPureAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, RecyclerView.ViewHolder holder, int position) {

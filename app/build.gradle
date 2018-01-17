@@ -9,6 +9,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -35,6 +36,7 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
 
     sourceSets {
         main {
@@ -64,7 +66,7 @@ dependencies {
     }
 
     //基础库
-    compile(name: 'XCoderAppLib', ext: 'aar')
+
 
     compile files('libs/BaiduLBS_Android.jar')
     compile files('libs/IndoorscapeAlbumPlugin.jar')
@@ -73,5 +75,7 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
-    compile 'com.github.Yuanarcheannovice:XCoderAppLib:1.0.1'
+    compile ('com.github.Yuanarcheannovice:XCoderAppLib:1.0.1') {
+        exclude group: 'com.android.support'
+    }
 }
