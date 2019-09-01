@@ -3,9 +3,14 @@
 
  仿qq发送位置 简单版
  
- 
- 
- 其中 XCoderAppLib.aar 包是注解框架,没有什么卵用，请忽略
+ 编译环境:
+ Android Studio 版本 3.5
+ Gradle 3.4.2
+ minSdkVersion = 21
+ targetSdkVersion = 23
+ compileSdkVersion = 28
+ supportVersion = '28.0.0'
+
  
  ##先看图
  
