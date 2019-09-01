@@ -1,12 +1,13 @@
 package com.xz.map.app;
 
+import android.content.Context;
 import android.util.Log;
 
+import com.archeanx.lib.util.ToastUtil;
+import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
-import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.xz.map.util.ToastUtil;
 
 
 /**
@@ -20,23 +21,17 @@ public class MapPositioning {
 
     private static MapPositioning mMapPositioning = null;
 
-    private LocationClient mLocationClient = null;
-    private BDLocationListener bdLocationListener;
+    private LocationClient mLocationClient;
 
 
-    public static MapPositioning getInstance() {
-        if (mMapPositioning == null) {
-            mMapPositioning = new MapPositioning();
-        }
-        return mMapPositioning;
-    }
 
-    private MapPositioning() {
+
+    public MapPositioning(Context context) {
         //声明LocationClient类
-        mLocationClient = new LocationClient(App.mContext);
+        mLocationClient = new LocationClient(context);
         initLocation();
         //注册监听函数
-        mLocationClient.registerLocationListener(bdLocationListener = new BDLocationListener() {
+        mLocationClient.registerLocationListener(new BDAbstractLocationListener() {
 
             /**
              * 接受位置内部类
@@ -107,15 +102,15 @@ public class MapPositioning {
                 } else if (location.getLocType() == BDLocation.TypeServerError) {
                     sb.append("\ndescribe : ");
                     sb.append("服务端网络定位失败，可以反馈IMEI号和大体定位时间到loc-bugs@baidu.com，会有人追查原因");
-                    ToastUtil.showToast("定位失败，请重试！");
+                    ToastUtil.show("定位失败，请重试！");
                 } else if (location.getLocType() == BDLocation.TypeNetWorkException) {
                     sb.append("\ndescribe : ");
                     sb.append("网络不同导致定位失败，请检查网络是否通畅");
-                    ToastUtil.showToast("定位失败，请检查网络是否通畅");
+                    ToastUtil.show("定位失败，请检查网络是否通畅");
                 } else if (location.getLocType() == BDLocation.TypeCriteriaException) {
                     sb.append("\ndescribe : ");
                     sb.append("无法获取有效定位依据导致定位失败，一般是由于手机的原因，处于飞行模式下一般会造成这种结果，可以试着重启手机");
-                    ToastUtil.showToast("定位失败，请检查是否是飞行模式");
+                    ToastUtil.show("定位失败，请检查是否是飞行模式");
                 }
                 sb.append("\nlocationdescribe : ");
                 // 位置语义化信息
@@ -124,10 +119,7 @@ public class MapPositioning {
                 Log.i("BaiduLocationApiDem", sb.toString());
             }
 
-            @Override
-            public void onConnectHotSpotMessage(String s, int i) {
 
-            }
         });
     }
 

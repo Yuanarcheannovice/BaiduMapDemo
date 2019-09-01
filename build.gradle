@@ -3,13 +3,10 @@
 buildscript {
     repositories {
         jcenter()
-        //需要用到arr包
-        flatDir {
-            dirs 'libs'
-        }
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.3'
+        classpath 'com.android.tools.build:gradle:3.5.0'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -18,12 +15,11 @@ buildscript {
 
 allprojects {
     repositories {
+        google()
         jcenter()
         maven { url 'https://jitpack.io' }
-        //需要用到arr包
-        flatDir {
-            dirs 'libs'
-        }
+        maven { url 'https://raw.githubusercontent.com/Yuanarcheannovice/Android_Lib/master/maven' }
+
     }
 }
 
@@ -33,9 +29,9 @@ task clean(type: Delete) {
 
 //全局设置版本
 ext {
-    minSdkVersion = 14
-    targetSdkVersion = 22
-    compileSdkVersion = 25
-    buildToolsVersion = "25.0.3"
-    supportVersion = '25.3.0'
+    minSdkVersion = 19
+    targetSdkVersion = 23
+    compileSdkVersion = 28
+    supportVersion = '28.0.0'
+    constraintLayout = '1.1.2'
 }

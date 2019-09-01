@@ -1,14 +1,13 @@
 package com.xz.map.function.adapter;
 
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.widget.TextView;
 
+import com.archeanx.lib.adapter.XRvPureDataAdapter;
+import com.archeanx.lib.adapter.xutil.XRvViewHolder;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.xz.map.R;
-import com.xz.map.app.App;
-import com.xz.xadapter.XRvPureDataAdapter;
-import com.xz.xadapter.xutil.XRvViewHolder;
-
 import java.util.List;
 
 
@@ -54,11 +53,11 @@ public class MapAdapter extends XRvPureDataAdapter<PoiInfo> {
         minTv.setText(poiInfo.address);
 
         if(mIndexTag==position){
-            bigTv.setTextColor(ContextCompat.getColor(App.mContext,R.color.app_sub_color));
-            minTv.setTextColor(ContextCompat.getColor(App.mContext,R.color.app_sub_color));
+            bigTv.setTextColor(ContextCompat.getColor(bigTv.getContext(),R.color.app_sub_color));
+            minTv.setTextColor(ContextCompat.getColor(minTv.getContext(),R.color.app_sub_color));
         }else{
-            bigTv.setTextColor(ContextCompat.getColor(App.mContext,R.color.app_txt_black));
-            minTv.setTextColor(ContextCompat.getColor(App.mContext,R.color.app_txt_gray_light));
+            bigTv.setTextColor(ContextCompat.getColor(bigTv.getContext(),R.color.app_txt_black));
+            minTv.setTextColor(ContextCompat.getColor(minTv.getContext(),R.color.app_txt_gray_light));
         }
     }
 
@@ -68,7 +67,7 @@ public class MapAdapter extends XRvPureDataAdapter<PoiInfo> {
      * @param isRefresh 是否刷新
      */
     @Override
-    public void setDatas(List<PoiInfo> datas, boolean isRefresh) {
+    public void setDatas(@NonNull List<PoiInfo> datas, boolean isRefresh) {
         if(mUserPoiInfo!=null&&datas!=null) {
             datas.add(0, mUserPoiInfo);
         }

@@ -1,51 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.xz.map">
 
-    <!--6.0重要权限-->
-    <uses-permission android:name="android.permission.CAMERA"><!--允许访问摄像头进行拍照--></uses-permission>
+    <!-- 读取外置存储。如果开发者使用了so动态加载功能并且把so文件放在了外置存储区域，则需要申请该权限，否则不需要 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 写外置存储。如果开发者使用了离线地图，并且数据写在外置存储区域，则需要申请该权限 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"><!--地址位置--></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"><!--读外置存储权限--></uses-permission>
+    <!-- 这个权限用于进行网络定位-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 这个权限用于访问GPS定位-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 获取运营商信息，用于支持提供运营商信息相关的接口-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据-->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"><!--允许程序写入外部存储，如SD卡上写文件--></uses-permission>
+    <!-- 访问网络，进行地图相关业务数据请求，包括地图数据，路线规划，POI检索等 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-    <!-- SD卡读取权限，用户写入离线定位数据-->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
-
-    <!--一般权限-->
-    <uses-permission android:name="android.permission.INTERNET"><!--访问网络连接，可能产生GPRS流量--></uses-permission>
-
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"><!--允许读写系统设置项--></uses-permission>
-
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"><!--系统报警窗口--></uses-permission>
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"><!--获取网络控制权限--></uses-permission>
-
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"><!--wifi管理--></uses-permission>
-
-    <uses-permission android:name="android.permission.SET_DEBUG_APP"><!--动态调试--></uses-permission>
-
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"><!--wifi的使用--></uses-permission>
-
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"><!--访问粗略的位置--></uses-permission>
-
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"><!--访问位置附加命令--></uses-permission>
-
-
-
+    <!-- 获取网络状态，根据网络状态切换进行数据请求网络转换 -->
     <application
         android:name=".app.App"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".function.activity.MapActivity"
-            android:screenOrientation="portrait">>
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -54,23 +46,19 @@
         </activity>
         <activity
             android:name=".function.activity.MapSearchActivity"
-            android:screenOrientation="portrait">>
-        </activity>
+            android:screenOrientation="portrait" />
 
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="4Yf0rq5Nx2lTKWl5IxMsLanZmResKGD4" />
-
-
-        <!-- 百度定位服务 -->
-
-
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote"></service>
-        <!-- 引导页 -->
+            android:process=":remote"/>
     </application>
+
+
+
 
 </manifest>

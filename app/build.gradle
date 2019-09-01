@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "com.xz.map"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -46,36 +45,32 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     //
-    compile "com.android.support:support-v4:${supportVersion}"
-    compile "com.android.support:appcompat-v7:${supportVersion}"
-    compile "com.android.support:design:${supportVersion}"
-    compile "com.android.support:recyclerview-v7:${supportVersion}"
-//
+    implementation "com.android.support.constraint:constraint-layout:${constraintLayout}"
+    implementation "com.android.support:support-v4:${supportVersion}"
+    implementation "com.android.support:appcompat-v7:${supportVersion}"
+    implementation "com.android.support:design:${supportVersion}"
+    implementation "com.android.support:recyclerview-v7:${supportVersion}"
+   //\
+    implementation 'com.archeanx.android:lib_util:1.1.4'
+    implementation 'com.archeanx.android:lib_base:1.1.1'
+    implementation 'com.archeanx.android:lib_widget:1.1.6'
+    implementation 'com.archeanx.android:lib_style:1.0.1'
+    implementation 'com.archeanx.android:lib_adapter:1.2.1'
+    implementation 'com.archeanx.android:lib_util_fresco:1.0.6'
 
-    //刷新加载(https://github.com/scwang90/SmartRefreshLayout)
-    compile('com.scwang.smartrefresh:SmartRefreshLayout:1.0.3-alpha-5') {
-        exclude group: 'com.android.support'
-    }
+    //刷新加载(https://github.com/scwang90/SmartRefreshLayout)//1.0.5及以前版本的老用户升级需谨慎，API改动过大
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0'
 
-    //基础库
+    //百度sdk库，
+    implementation files('libs/BaiduLBS_Android.jar')
 
-
-    compile files('libs/BaiduLBS_Android.jar')
-    compile files('libs/IndoorscapeAlbumPlugin.jar')
-
-    compile('com.github.Yuanarcheannovice:XBaseAdapter:1.2') {
-        exclude group: 'com.android.support'
-    }
-
-    compile ('com.github.Yuanarcheannovice:XCoderAppLib:1.0.1') {
-        exclude group: 'com.android.support'
-    }
+    //权限
+    implementation 'com.yanzhenjie.permission:support:2.0.1'
 }

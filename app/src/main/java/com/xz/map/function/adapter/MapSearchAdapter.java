@@ -3,10 +3,11 @@ package com.xz.map.function.adapter;
 
 import android.widget.TextView;
 
+import com.archeanx.lib.adapter.XRvPureDataAdapter;
+import com.archeanx.lib.adapter.xutil.XRvViewHolder;
 import com.baidu.mapapi.search.sug.SuggestionResult;
 import com.xz.map.R;
-import com.xz.xadapter.XRvPureDataAdapter;
-import com.xz.xadapter.xutil.XRvViewHolder;
+
 
 /**
  * Created by xz on 2017/8/9 0009.
