@@ -61,8 +61,8 @@ dependencies {
     implementation 'com.archeanx.android:lib_base:1.1.1'
     implementation 'com.archeanx.android:lib_widget:1.1.6'
     implementation 'com.archeanx.android:lib_style:1.0.1'
-    implementation 'com.archeanx.android:lib_adapter:1.2.1'
-    implementation 'com.archeanx.android:lib_util_fresco:1.0.6'
+    implementation 'com.archeanx.android:lib_adapter:1.2.3'
+    implementation 'com.archeanx.android:lib_util_fresco:1.0.7'
 
     //刷新加载(https://github.com/scwang90/SmartRefreshLayout)//1.0.5及以前版本的老用户升级需谨慎，API改动过大
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'

@@ -129,6 +129,7 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
         initListener();
     }
 
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.am_submit:
